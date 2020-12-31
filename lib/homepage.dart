@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:githubwrap/result.dart';
 import 'githubapi.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,9 +36,6 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10.0),
                     gapPadding: 20.0),
                 hintText: 'Enter GitHub Username',
-                //   errorText: ' Oops, something is not right!',
-                //   errorStyle:
-                //       TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),
               onChanged: (text) {
                 enteredusername = text;
@@ -47,7 +45,10 @@ class _HomePageState extends State<HomePage> {
           RaisedButton(
             child: Text('Search'),
             onPressed: () {
-              getData(enteredusername);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResultPage(enteredusername)));
             },
           ),
         ],
