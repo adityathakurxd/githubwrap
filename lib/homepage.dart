@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'githubapi.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -6,6 +7,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var enteredusername;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +40,15 @@ class _HomePageState extends State<HomePage> {
                 //       TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),
               onChanged: (text) {
-                print("First text field: $text");
+                enteredusername = text;
               },
             ),
+          ),
+          RaisedButton(
+            child: Text('Search'),
+            onPressed: () {
+              getData(enteredusername);
+            },
           ),
         ],
       ),
