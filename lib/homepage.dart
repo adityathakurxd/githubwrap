@@ -9,6 +9,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var enteredusername;
+  GitHubAPI gitHubAPI = GitHubAPI();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,11 +45,12 @@ class _HomePageState extends State<HomePage> {
           ),
           RaisedButton(
             child: Text('Search'),
-            onPressed: () {
+            onPressed: () async {
+              var userData = await gitHubAPI.getData(enteredusername);
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ResultPage(enteredusername)));
+                      builder: (context) => ResultPage(userData)));
             },
           ),
         ],

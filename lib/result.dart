@@ -1,46 +1,36 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
-import 'githubapi.dart';
 
 class ResultPage extends StatefulWidget {
-  final String username;
-  ResultPage(this.username);
+  final userData;
+  ResultPage(this.userData);
 
   @override
   _ResultPageState createState() => _ResultPageState();
 }
 
 class _ResultPageState extends State<ResultPage> {
+  String name;
+  int followers;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    updateUI(widget.userData);
+  }
+
+  void updateUI(dynamic userData) {
+    setState(() {
+      name = userData['name'];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: getData(widget.username),
-        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-          if (snapshot.hasData) {
-            return Scaffold(
-              backgroundColor: Colors.blue[900],
-              body: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                  ),
-                  Container(
-                    height: 400,
-                    width: 200,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20.0)),
-                    child: Center(
-                      child: Text(snapshot.data),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }
-        });
+    return Scaffold(
+      body: Text('$name'),
+    );
   }
 }
